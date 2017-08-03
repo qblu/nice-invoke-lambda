@@ -1,0 +1,31 @@
+{
+  "name": "nice-invoke-lambda",
+  "version": "0.1.0",
+  "description": "A nicer way to invoke AWS Lambda",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qblu/nice-invoke-lambda.git"
+  },
+  "keywords": [
+    "aws",
+    "lambda",
+    "invoke",
+    "promise"
+  ],
+  "author": "Joe Lafiosca <joe@quasarblu.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/qblu/nice-invoke-lambda/issues"
+  },
+  "homepage": "https://github.com/qblu/nice-invoke-lambda#readme",
+  "dependencies": {
+    "bluebird": "^3.4.7"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.94.0"
+  }
+}
