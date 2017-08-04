@@ -96,7 +96,29 @@ const invoke = (lambdaFunction, lambdaEvent) => {
 		});
 };
 
+const invokeAsync = (lambdaFunction, lambdaEvent) => {
+	const params = {
+		FunctionName: lambdaFunction,
+		Payload: JSON.stringify(lambdaEvent),
+		InvocationType: 'Event',
+	};
+
+	return lambda.invoke(params)
+		.promise()
+		.then(response => {
+			if (response.StatusCode !== 202) {
+				// Lambda service failure
+				throw new Error(
+					`Failed to invoke Lambda function ${lambdaFunction}:\n`
+					+ JSON.stringify(response, null, 2)
+				);
+			}
+			return true;
+		});
+};
+
 module.exports = {
 	invoke,
+	invokeAsync,
 };
 
