@@ -1,6 +1,6 @@
 {
   "name": "nice-invoke-lambda",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A nicer way to invoke AWS Lambda",
   "main": "index.js",
   "scripts": {
