@@ -7,7 +7,7 @@ AWS.config.setPromisesDependency(Promise);
 
 const lambda = new AWS.Lambda();
 
-const invoke = (lambdaFunction, lambdaEvent) => {
+const invokeRequestResponse = (lambdaFunction, lambdaEvent) => {
 	const params = {
 		FunctionName: lambdaFunction,
 		Payload: JSON.stringify(lambdaEvent),
@@ -96,7 +96,7 @@ const invoke = (lambdaFunction, lambdaEvent) => {
 		});
 };
 
-const invokeAsync = (lambdaFunction, lambdaEvent) => {
+const invokeEvent = (lambdaFunction, lambdaEvent) => {
 	const params = {
 		FunctionName: lambdaFunction,
 		Payload: JSON.stringify(lambdaEvent),
@@ -118,7 +118,11 @@ const invokeAsync = (lambdaFunction, lambdaEvent) => {
 };
 
 module.exports = {
-	invoke,
-	invokeAsync,
+	invokeRequestResponse,
+	invokeEvent,
+	invoke: invokeRequestResponse,
+	invokeAsync: invokeEvent,
+	invokeAndWait: invokeRequestResponse,
+	invokeAndForget: invokeEvent,
 };
 
