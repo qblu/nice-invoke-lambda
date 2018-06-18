@@ -4,7 +4,7 @@ const AWS = require('aws-sdk');
 
 AWS.config.update({ region: 'us-east-1' });
 
-const invoke = require('./index').invoke;
+const { invoke } = require('../index');
 
 /*
  * Any of these function name styles should work:
@@ -15,13 +15,13 @@ const invoke = require('./index').invoke;
  *  invoke('AddNumbers:beta', { a: 1, b: 3 })'
  */
 invoke('AddNumbers', { a: 1, b: 3 })
-	.then(response => {
+	.then((response) => {
 		console.log('Response:');
 		console.log(response);
 		console.log('Stringified:');
 		console.log(JSON.stringify(response, null, 2));
 	})
-	.catch(error => {
+	.catch((error) => {
 		console.error('Error:');
 		console.error(error);
 		console.error('Stringified:');

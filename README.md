@@ -2,16 +2,6 @@
 
 A nice way to invoke AWS Lambda functions from Lambda functions
 
-## Why devDependencies?
-
-The `aws-sdk` package is listed in devDependencies rather than dependencies
-because this package was created to support a use case of invoking Lambda
-functions from other Lambda functions. In the Lambda environment, `aws-sdk` is
-automatically provided, so to avoid repackaging it when building our Lambda
-zips, we leave `aws-sdk` out of the production dependencies. If you intend
-to use this package outside of Lambda, you may need to modify or work
-around that choice.
-
 ## invoke(lambdaFunction, lambdaEvent)
 
 Returns a promise that will invokes a Lambda function synchronously,

@@ -17,15 +17,14 @@
     "promise"
   ],
   "author": "Joe Lafiosca <joe@quasarblu.com>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/qblu/nice-invoke-lambda/issues"
   },
   "homepage": "https://github.com/qblu/nice-invoke-lambda#readme",
   "dependencies": {
-    "bluebird": "^3.4.7"
+    "aws-sdk": "^2.259.1",
+    "bluebird": "^3.5.1"
   },
-  "devDependencies": {
-    "aws-sdk": "^2.94.0"
-  }
+  "devDependencies": {}
 }
