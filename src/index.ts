@@ -1,6 +1,6 @@
-import AWS from 'aws-sdk';
+import awsSdk from 'aws-sdk';
 
-const lambda = new AWS.Lambda();
+const lambda = new awsSdk.Lambda();
 
 export const invokeRequestResponse = (lambdaFunction:string, lambdaEvent:any) => {
 	const params = {
