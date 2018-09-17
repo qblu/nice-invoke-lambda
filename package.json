@@ -2,9 +2,12 @@
   "name": "nice-invoke-lambda",
   "version": "0.3.0",
   "description": "A nicer way to invoke AWS Lambda",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "./node_modules/.bin/tslint -p tsconfig.json -c tslint.json",
+    "build": "./node_modules/.bin/tsc",
+    "prepublish": "./node_modules/.bin/tsc"
   },
   "repository": {
     "type": "git",
@@ -14,7 +17,8 @@
     "aws",
     "lambda",
     "invoke",
-    "promise"
+    "promise",
+    "typescript"
   ],
   "author": "Joe Lafiosca <joe@quasarblu.com>",
   "license": "MIT",
@@ -23,8 +27,12 @@
   },
   "homepage": "https://github.com/qblu/nice-invoke-lambda#readme",
   "dependencies": {
-    "aws-sdk": "^2.259.1",
-    "bluebird": "^3.5.1"
+    "aws-sdk": "^2.259.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/node": "^10.10.0",
+    "tslint": "^5.11.0",
+    "tslint-config-airbnb": "^5.10.0",
+    "typescript": "^3.0.1"
+  }
 }

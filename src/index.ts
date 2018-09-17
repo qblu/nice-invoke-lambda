@@ -1,13 +1,8 @@
-'use strict';
-
-const Promise = require('bluebird');
-
-const AWS = require('aws-sdk');
-AWS.config.setPromisesDependency(Promise);
+import AWS from 'aws-sdk';
 
 const lambda = new AWS.Lambda();
 
-const invokeRequestResponse = (lambdaFunction, lambdaEvent) => {
+export const invokeRequestResponse = (lambdaFunction:string, lambdaEvent:any) => {
 	const params = {
 		FunctionName: lambdaFunction,
 		Payload: JSON.stringify(lambdaEvent),
@@ -16,24 +11,23 @@ const invokeRequestResponse = (lambdaFunction, lambdaEvent) => {
 
 	return lambda.invoke(params)
 		.promise()
-		.then(response => {
+		.then((response) => {
 			if (response.StatusCode !== 200) {
 				// Lambda service failure
 				throw new Error(
-					`Failed to invoke Lambda function ${lambdaFunction}:\n`
-					+ JSON.stringify(response, null, 2)
+					`Failed to invoke Lambda function ${lambdaFunction}:\n${JSON.stringify(response, null, 2)}`,
 				);
 			}
 
 			let payload;
 
 			try {
-				payload = JSON.parse(response.Payload);
+				payload = JSON.parse(response.Payload as string);
 			} catch (error) {
 				// Bad JSON payload from Lambda service?
+				const errorMessage = error.message || JSON.stringify(error, null, 2);
 				throw new Error(
-					`Failed to parse Lambda response payload '${response.Payload}':\n`
-					+ (error.message || JSON.stringify(error, null, 2))
+					`Failed to parse Lambda response payload '${response.Payload}':\n${errorMessage}`,
 				);
 			}
 
@@ -96,7 +90,7 @@ const invokeRequestResponse = (lambdaFunction, lambdaEvent) => {
 		});
 };
 
-const invokeEvent = (lambdaFunction, lambdaEvent) => {
+export const invokeEvent = (lambdaFunction: string, lambdaEvent: any) => {
 	const params = {
 		FunctionName: lambdaFunction,
 		Payload: JSON.stringify(lambdaEvent),
@@ -105,24 +99,16 @@ const invokeEvent = (lambdaFunction, lambdaEvent) => {
 
 	return lambda.invoke(params)
 		.promise()
-		.then(response => {
+		.then((response) => {
 			if (response.StatusCode !== 202) {
 				// Lambda service failure
 				throw new Error(
-					`Failed to invoke Lambda function ${lambdaFunction}:\n`
-					+ JSON.stringify(response, null, 2)
+					`Failed to invoke Lambda function ${lambdaFunction}:\n${JSON.stringify(response, null, 2)}`,
 				);
 			}
 			return true;
 		});
 };
 
-module.exports = {
-	invokeRequestResponse,
-	invokeEvent,
-	invoke: invokeRequestResponse,
-	invokeAsync: invokeEvent,
-	invokeAndWait: invokeRequestResponse,
-	invokeAndForget: invokeEvent,
-};
-
+export const invoke = invokeRequestResponse;
+export const invokeAsync = invokeEvent;
